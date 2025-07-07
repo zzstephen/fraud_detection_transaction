@@ -9,16 +9,24 @@ import json
 from data_config import *
 import pickle
 sys.path.append('../../../../infrastructure/preprocessing')
-from data_transformer import *
+from data_transformer import dummyTransformer
 from feature_engineering import feature_engineering
 from feature_engine.datetime import DatetimeFeatures
+import duckdb
 
 
-def main(cards=None):
+
+def main():
+
+    logger.add("feature_engineering.log", level="INFO")
+
+    logger.info(f"Execution time stamp: {datetime.datetime.now()}")
 
     cards = pd.read_csv(f'{intermediate}/cards.csv')
 
     transactions = pd.read_csv(f"{intermediate}/transactions.csv")
+
+    transactions['amount'] = transactions['amount'].apply(lambda x: float(x.replace("$", "")))
 
     logger.info(f'preprocess cards data. shape is: ({cards.shape[0]},{cards.shape[1]})')
 
@@ -46,6 +54,8 @@ def main(cards=None):
         'num_credit_cards']
 
     user_info = cards[user_attr].drop_duplicates().reset_index(drop=True)
+
+    logger.info('Creating user level aggregates')
 
     user_info_agg = utilities.pivot(cards, varlist={'credit_limit': 'sum', 'card_on_dark_web': 'sum'},
                                     by_vars=['user_id'])
@@ -75,7 +85,11 @@ def main(cards=None):
 
     cards = cards.merge(user_info[user_info_keep], on='user_id', how='left')
 
+    logger.info('Combining cards and transactions data.')
+
     combine_data = transactions.merge(cards, on=['user_id', 'card_id'], how='left').sort_values(by=['user_id', 'card_id']).reset_index(drop=True)
+
+    logger.info('Creating datetime features')
 
     dtf = DatetimeFeatures(features_to_extract=["year", "month", 'weekend', 'year_end', 'year_start', 'hour'])
 
@@ -87,25 +101,52 @@ def main(cards=None):
 
     tw_vars = yml_file['time_window_aggregates']
 
+    logger.info('Creating window features')
+
+    con = utilities.register_df_view(combine_data,'df')
+
     for var in tw_vars:
+
         newfeatures = yml_file[var]
+
         for f in newfeatures:
+
             params = f.split(';')
-            newcolumns = feature_engineering.create_time_window_agg(combine_data, [var], 'date', params[0], params[1], params[2], params[3])
-            mergeby = params.split(',')
+
+            logger.info(f'Creating window features for {var}, params: {params}')
+
+            newcolumns = feature_engineering.create_time_window_agg(con, 'df', [var], 'date', params[0], params[1], params[2])
+            mergeby = params[2].split(',')
+            mergeby.append('date')
             combine_data = combine_data.merge(newcolumns, on=mergeby, how='left')
 
+    utilities.drop_df_view(con, 'df')
 
-    auto_dummy_vars = ['merchat_city','use_chip','merchat_city','merchant_state','mcc','errors','merchant_type','card_on_dark_web_sum','geo_enconding']
+    logger.info('Generating dummies and clustering them.')
+
+
+    auto_dummy_vars = ['merchat_city','use_chip','merchat_city','merchant_state','mcc','errors',
+                       'merchant_type','card_on_dark_web_sum','geo_enconding','month']
 
     for var in auto_dummy_vars:
 
-        transactions[var].fillna('missing')
+        logger.info(f'Creating dummies and clustering schema for {var}')
 
-        feature_engineering.auto_group_dummies(transactions, varlist=[var], y_var = 'target', mtype='classification',out_filename=f'auto_group_dummy_{var}.yaml', min_obs=20)
+        combine_data[var].fillna('missing')
 
-    # combine_data = transactions.merge(cards, on=['user_id, card_id']).merge(user_info[['credit_limit_sum'']])
+        feature_engineering.auto_group_dummies(combine_data, varlist=[var], y_var = 'target', mtype='classification',out_filename=f'auto_group_dummy_{var}.yaml', min_obs=20)
 
+        logger.info(f'Clustering dummies for {var}')
+
+        dt = dummyTransformer(f'auto_group_dummy_{var}.yaml')
+
+        combine_data = dt.fit_transform(combine_data)
+
+    logger.info(f'saving model data to {processed_data}/model_data.csv')
+
+    combine_data.to_csv(f'{processed_data}/model_data.csv', index=False)
+
+    logger.info('All done.')
 
 if __name__ == "__main__":
     main()
