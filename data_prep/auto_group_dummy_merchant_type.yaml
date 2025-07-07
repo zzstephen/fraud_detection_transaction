@@ -1,0 +1,57 @@
+get_dummies:
+- merchant_type
+merchant_type:
+- 0,merchant_type_Athletic Fields, Commercial Sports,merchant_type_Bolt, Nut, Screw,
+  Rivet Manufacturing,merchant_type_Brick, Stone, and Related Materials,merchant_type_Department
+  Stores,merchant_type_Gift, Card, Novelty Stores,merchant_type_Lighting, Fixtures,
+  Electrical Supplies,merchant_type_Lodging - Hotels, Motels, Resorts,merchant_type_Railroad
+  Passenger Transport,merchant_type_Steel Products Manufacturing,merchant_type_Tools,
+  Parts, Supplies Manufacturing,merchant_type_Travel Agencies,merchant_type_Welding
+  Repair
+- 1,merchant_type_Car Washes,merchant_type_Dentists and Orthodontists,merchant_type_Detective
+  Agencies, Security Services,merchant_type_Doctors, Physicians,merchant_type_Laundry
+  Services,merchant_type_Lumber and Building Materials,merchant_type_Medical Services,merchant_type_Money
+  Transfer,merchant_type_Package Stores, Beer, Wine, Liquor,merchant_type_Recreational
+  Sports, Clubs,merchant_type_Telecommunication Services
+- 2,merchant_type_Book Stores,merchant_type_Grocery Stores, Supermarkets,merchant_type_Utilities
+  - Electric, Gas, Water, Sanitary
+- 3,merchant_type_Computers, Computer Peripheral Equipment,merchant_type_Electronics
+  Stores,merchant_type_Music Stores - Musical Instruments,merchant_type_Precious Stones
+  and Metals
+- 4,merchant_type_Airlines,merchant_type_Amusement Parks, Carnivals, Circuses,merchant_type_Antique
+  Shops,merchant_type_Automotive Parts and Accessories Stores,merchant_type_Bus Lines,merchant_type_Cosmetic
+  Stores,merchant_type_Digital Goods - Media, Books, Apps,merchant_type_Fabricated
+  Structural Metal Products,merchant_type_Floor Covering Stores,merchant_type_Florists
+  Supplies, Nursery Stock and Flowers,merchant_type_Gardening Supplies,merchant_type_Industrial
+  Equipment and Supplies,merchant_type_Miscellaneous Fabricated Metal Products,merchant_type_Miscellaneous
+  Metal Fabrication,merchant_type_Non-Ferrous Metal Foundries,merchant_type_Non-Precious
+  Metal Services,merchant_type_Passenger Railways,merchant_type_Steelworks
+- 5,merchant_type_Beauty and Barber Shops,merchant_type_Cable, Satellite, and Other
+  Pay Television Services,merchant_type_Drinking Places (Alcoholic Beverages),merchant_type_Drug
+  Stores and Pharmacies,merchant_type_Fast Food Restaurants,merchant_type_Insurance
+  Sales, Underwriting,merchant_type_Local and Suburban Commuter Transportation,merchant_type_Motion
+  Picture Theaters,merchant_type_Postal Services - Government Only,merchant_type_Taxicabs
+  and Limousines
+- 6,merchant_type_Artist Supply Stores, Craft Shops,merchant_type_Betting (including
+  Lottery Tickets, Casinos),merchant_type_Books, Periodicals, Newspapers,merchant_type_Chiropractors,merchant_type_Hardware
+  Stores,merchant_type_Heating, Plumbing, Air Conditioning Contractors,merchant_type_Lawn
+  and Garden Supply Stores,merchant_type_Legal Services and Attorneys,merchant_type_Motor
+  Freight Carriers and Trucking,merchant_type_Optometrists, Optical Goods and Eyeglasses,merchant_type_Podiatrists,merchant_type_Sports
+  Apparel, Riding Apparel Stores,merchant_type_Tax Preparation Services,merchant_type_Wholesale
+  Clubs,merchant_type_Women's Ready-To-Wear Stores
+- 7,merchant_type_Digital Goods - Games,merchant_type_Furniture, Home Furnishings,
+  and Equipment Stores
+- 8,merchant_type_Cruise Lines
+- 9,merchant_type_Automotive Body Repair Shops,merchant_type_Discount Stores,merchant_type_Heat
+  Treating Metal Services,merchant_type_Hospitals,merchant_type_Household Appliance
+  Stores,merchant_type_Leather Goods,merchant_type_Miscellaneous Home Furnishing Stores,merchant_type_Miscellaneous
+  Metals,merchant_type_Pottery and Ceramics,merchant_type_Railroad Freight,merchant_type_Shoe
+  Stores,merchant_type_Theatrical Producers,merchant_type_Towing Services,merchant_type_Upholstery
+  and Drapery Stores
+- 10,merchant_type_Automotive Service Shops,merchant_type_Eating Places and Restaurants,merchant_type_Miscellaneous
+  Food Stores,merchant_type_Service Stations,merchant_type_Tolls and Bridge Fees
+- 11,merchant_type_Coated and Laminated Products,merchant_type_Computer Network Services,merchant_type_Electroplating,
+  Plating, Polishing Services,merchant_type_Family Clothing Stores,merchant_type_Ironwork,merchant_type_Miscellaneous
+  Machinery and Parts Manufacturing,merchant_type_Miscellaneous Metalwork,merchant_type_Semiconductors
+  and Related Devices,merchant_type_Ship Chandlers,merchant_type_Sporting Goods Stores,merchant_type_Steel
+  Drums and Barrels
