@@ -1,0 +1,6 @@
+get_dummies:
+- errors
+errors:
+- 0,errors_Bad Card Number,errors_Bad Expiration
+- 1,errors_Bad Zipcode,errors_Technical Glitch
+- 2,errors_Bad PIN,errors_Insufficient Balance

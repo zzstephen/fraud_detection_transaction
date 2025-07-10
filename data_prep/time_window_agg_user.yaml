@@ -1,0 +1,22 @@
+time_window_aggregates:
+  - amount
+
+amount:
+  - '24;hours;user_id'
+  - '3;days;user_id'
+  - '7;days;user_id'
+  - '30;days;user_id'
+  - '60;days;user_id'
+
+  - '24;hours;user_id,card_type'
+  - '3;days;user_id,card_type'
+  - '7;days;user_id,card_type'
+  - '30;days;user_id,card_type'
+  - '60;days;user_id,card_type'
+
+  - '24;hours;card_id'
+  - '3;days;card_id'
+  - '7;days;card_id'
+  - '30;days;card_id'
+  - '60;days;card_id'
+
